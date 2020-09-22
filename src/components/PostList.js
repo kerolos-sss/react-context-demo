@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListGroup, ListGroupItem } from 'reactstrap'
+import { Input, ListGroup, ListGroupItem } from 'reactstrap'
 
 /**
  * @typedef {Object} PostItem
@@ -28,9 +28,9 @@ export const PostList = ({posts, actions}) => {
                     return <ListGroupItem key={item.key}>
                         <h4>{item.heading}</h4>
                         <h4>{item.detail.substring(0, 15) + "..."}</h4>
-                        <button value="DELETE" onClick={ () => actions.delete(key)} />
-                        <button value="Edit" onClick={ () => actions.edit(key)} />
-                        <button value="View" onClick={ () => actions.view(key)} />
+                        <Input type="button" value="DELETE"  onClick={ () => actions.delete(item.key)} />
+                        <Input type="button" value="Edit" onClick={ () => actions.edit(item.key)} />
+                        <Input type="button" value="View" onClick={ () => actions.view(item.key)} />
                         
                         </ListGroupItem>
                 })                
