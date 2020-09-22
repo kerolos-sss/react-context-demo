@@ -23,7 +23,6 @@ export const PostList = ({posts, actions}) => {
 
     console.log("PostList");
     
-    console.log(posts);
     return <div>
         <ListGroup>
             {

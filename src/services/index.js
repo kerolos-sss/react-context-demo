@@ -108,7 +108,7 @@ export const addPost = (post) => {
 
             setTimeout(() => {
                 let ids = DataContainer.data.map(post => post.id);
-                let newId = Math.max(ids) + 1;
+                let newId = Math.max([0,...ids]) + 1;
                 post.id = newId;
                 DataContainer.data.push({ ...post });
                 resolve(post);

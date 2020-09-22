@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Input } from 'reactstrap'
 import { PostList } from '../components/PostList'
 import { PostsContext } from '../contexts/PostsContext'
@@ -19,6 +20,12 @@ let postsSample = [
 export const PostsScreen = () => {
 
     const { state: postsState, fetchAll, deletePost } = useContext(PostsContext)
+    const history = useHistory();
+    const navigateToAddPost = () => {
+        history.push("/posts/new")
+    }
+    
+    
     useEffect(() => {
         console.log("PostsScreen reloaded")
         fetchAll()
@@ -28,20 +35,30 @@ export const PostsScreen = () => {
 
     return <>
         {
+            <Input type="button" onClick={navigateToAddPost} value="New Post" />
+        }
+        {
             <Input type="button" onClick={fetchAll} value="Reload" />
         }
-        { 
-        postsState ? 
-            <PostList posts={(postsState?.posts || []).map(item => {
-                return {
-                    key: item.id,
-                    heading: item.title,
-                    detail: item.body
-                }
-            })}
-                actions={{ delete: deletePost, edit: () => { }, view: () => { } }} />
-            :
-            <h3>No Posts yet</h3>
+        {
+            postsState?.error ? <h4 style={{ color: "red" }}> {postsState.error}</h4> : null
+        }
+        {
+            postsState?.successMessage ? <h4> {postsState.successMessage}</h4> : null
+        }
+
+        {
+            postsState?.posts ?
+                <PostList posts={(postsState.posts).map(item => {
+                    return {
+                        key: item.id,
+                        heading: item.title,
+                        detail: item.body
+                    }
+                })}
+                    actions={{ delete: deletePost, edit: () => { }, view: () => { } }} />
+                :
+                <h3>No Posts yet</h3>
         }
     </>
 }

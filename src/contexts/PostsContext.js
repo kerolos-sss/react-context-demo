@@ -9,9 +9,13 @@ import * as services from './../services'
  *  posts: {id: number, title: string, body: string, successMessage: string | null | undefined}[] }}
  */
 const reducer = (state, action) => {
-    if (state == null){
-        state = {}
-    }
+    console.log("PostsReducer")
+    console.log(state)
+    console.log(action)
+    
+    // if (state == null){
+    //     state = {}
+    // }
     switch (action.type) {
         case "fetch_posts_success":
             return { ...state, successMessage: action.payload.successMessage, error: null, posts: action.payload.posts };
@@ -19,9 +23,8 @@ const reducer = (state, action) => {
             return { ...state, successMessage: null, error: action.payload, posts: null };
 
         case "delete_post_success":
-            let postIndex = state.posts.findIndex(item => item.id = action.payload.id);
-            let posts = posts.splice(postIndex, 1);
-            return { ...state, successMessage: action.payload.successMessage, error: null, posts: posts };
+            state.posts = state.posts.filter(item => item.id != action.payload.id);
+            return { ...state, successMessage: action.payload.successMessage, error: null, posts: [...state.posts] };
         case "delete_post_error":
             return { ...state, successMessage: null, error: action.payload }
 
@@ -60,7 +63,7 @@ const fetchAll = dispatch => async () => {
 
 const deletePost = dispatch => async (id) => {
     try {
-        let posts = await services.deletePost(id);
+        await services.deletePost(id);
         dispatch({ type: "delete_post_success", payload: { id: id, successMessage: "Deleted successfully" } })
     } catch (e) {
         dispatch({ type: "delete_post_error", payload: e.message })
@@ -71,8 +74,10 @@ const editPost = dispatch => async (id, data) => {
     try {
         let post = await services.editPost(id, data);
         dispatch({ type: "edit_post_success", payload: { id: id, data: data, successMessage: "Edited successfully" } })
+        return true;
     } catch (e) {
         dispatch({ type: "edit_post_error", payload: e.message })
+        throw e;
     }
 }
 
@@ -81,8 +86,10 @@ const addPost = dispatch => async (data) => {
         let post = await services.addPost(data);
         let id = post.id;
         dispatch({ type: "add_post_success", payload: { id: id, data: data, successMessage: "Added successfully" } })
+        return true;
     } catch (e) {
         dispatch({ type: "add_post_error", payload: e.message })
+        throw e
     }
 }
 
