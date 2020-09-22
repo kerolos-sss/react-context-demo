@@ -4,13 +4,20 @@
  * @param {string} user 
  * @param {string} pass 
  */
+
+
+
 export const logIn = async (user, pass) => {
     return new Promise((resolve, reject) => {
         if (user == pass) {
-            setTimeout(() => resolve({
-                userId: user,
-                userToken: "TOKEN"
-            }), 1000);
+            setTimeout(() => {
+                let token = "TOKEN";
+                setToken(token)
+                resolve({
+                    userId: user,
+                    userToken: token 
+                });
+            }, 1000);
         } else {
             setTimeout(() => {
                 reject(new Error("Authentication failed"));
@@ -31,8 +38,15 @@ export const signUp = (user, pass) => {
     });
 }
 
-export class DataContainer {
+export const setToken = (token) => {
+    DataContainer.token = token;
+}
 
+export const getToken = () => {
+    return DataContainer.token;
+}
+export class DataContainer {
+    static token = null;
     static data = [
         {
             id: 1,
@@ -96,7 +110,7 @@ export const addPost = (post) => {
                 let ids = DataContainer.data.map(post => post.id);
                 let newId = Math.max(ids) + 1;
                 post.id = newId;
-                DataContainer.data.push({...post});
+                DataContainer.data.push({ ...post });
                 resolve(post);
             }, 1000);
 
@@ -117,12 +131,12 @@ export const editPost = (id, post) => {
             setTimeout(() => {
 
                 let original = DataContainer.data.find(post => post.id == id);
-                if (!original){
+                if (!original) {
                     reject(new Error("Resource Not Found"));
                     return;
                 }
-                original = {...post, id: id}
-                resolve({...original});
+                original = { ...post, id: id }
+                resolve({ ...original });
             }, 1000);
 
         } else {
@@ -132,7 +146,6 @@ export const editPost = (id, post) => {
         }
     });
 }
-
 
 export const deletePost = (id) => {
     // I want a fair chance of failure 
@@ -143,13 +156,13 @@ export const deletePost = (id) => {
             setTimeout(() => {
 
                 let originalIndex = DataContainer.data.findIndex(post => post.id == id);
-                if ( originalIndex == -1){
+                if (originalIndex == -1) {
                     reject(new Error("Resource Not Found"));
                     return;
                 }
 
-                DataContainer.data.splice(originalIndex,1)
-                resolve({message: "Deleted"});
+                DataContainer.data.splice(originalIndex, 1)
+                resolve({ message: "Deleted" });
             }, 1000);
 
         } else {
@@ -159,4 +172,7 @@ export const deletePost = (id) => {
         }
     });
 }
-export default { logIn, signUp }
+
+
+
+// export default { logIn, signUp }

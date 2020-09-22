@@ -1,5 +1,5 @@
 import {createDataContext} from './createDataContext'
-import services from './../services'
+import * as services from './../services'
 
 
 const reducer = (state, action) => {
@@ -35,7 +35,6 @@ const setUsername = dispatch => (username) => {
 const setPassword = dispatch => (password) => {
     dispatch({type: "login_set_password", payload: password})
 }
-
 
 export const { Context: AuthContext, Provider: AuthProvider  } = createDataContext(
     reducer, {
