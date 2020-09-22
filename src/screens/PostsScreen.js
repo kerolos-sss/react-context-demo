@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Input } from 'reactstrap'
 import { PostList } from '../components/PostList'
-import { PostsContext } from '../contexts/PostsContext'
+import { PostsContext, withPosts } from '../contexts/PostsContext'
 
 let postsSample = [
     {
@@ -17,9 +17,10 @@ let postsSample = [
     },
 ]
 
-export const PostsScreen = () => {
+const _PostsScreen = ({postsState, fetchAll, deletePost}) => {
 
-    const { state: postsState, fetchAll, deletePost } = useContext(PostsContext)
+    // const { state: postsState, fetchAll, deletePost } = useContext(PostsContext)
+    
     const history = useHistory();
     const navigateToAddPost = () => {
         history.push("/posts/new")
@@ -70,3 +71,5 @@ export const PostsScreen = () => {
         }
     </>
 }
+
+export const PostsScreen = withPosts(_PostsScreen);

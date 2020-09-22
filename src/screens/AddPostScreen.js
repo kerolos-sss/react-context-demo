@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { useHistory, useParams, withRouter } from "react-router-dom"
 import { PostForm } from "../components/PostForm";
-import { PostsContext } from "../contexts/PostsContext";
+import { PostsContext, withPosts } from "../contexts/PostsContext";
 
-const _AddPostScreen = ({history}) =>{
+const _AddPostScreen = ({history, postsState, addPost}) =>{
 
-    const {state,  addPost} = useContext(PostsContext);
+    // const {state,  addPost} = useContext(PostsContext);
 
     const save = (key, post) => {
         addPost({
@@ -18,11 +18,11 @@ const _AddPostScreen = ({history}) =>{
         })
     }
     return <div>
-        <PostForm data={{}} doneHandler={save} success={state.success} error={state.error}  />
+        <PostForm data={{}} doneHandler={save} success={postsState.success} error={postsState.error}  />
     </div>
 }
 
 
 
-export const AddPostScreen = withRouter(_AddPostScreen)
+export const AddPostScreen = withPosts(  withRouter(_AddPostScreen) )
 

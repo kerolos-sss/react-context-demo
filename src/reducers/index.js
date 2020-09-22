@@ -3,5 +3,5 @@ import { authReducer } from "./authReducer";
 import { postsReducer } from "./postsReducer";
 
 export const combinedReducers = combineReducers({
-    postsReducer, authReducer
+    posts: postsReducer, auth: authReducer
 })

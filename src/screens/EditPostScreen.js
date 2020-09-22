@@ -1,15 +1,13 @@
 import React, { useContext } from "react";
 import { useHistory, useParams, withRouter } from "react-router-dom"
 import { PostForm } from "../components/PostForm";
-import { PostsContext } from "../contexts/PostsContext";
+import { PostsContext, withPosts } from "../contexts/PostsContext";
 import { editPost } from "../services";
 
-const _EditPostScreen = ({history, location, match}) =>{
+const _EditPostScreen = ({history, location, postsState,  editPost}) =>{
     // console.log(props);
-
-     
     
-    const {state,  editPost} = useContext(PostsContext);
+    // const {state: postsState,  editPost} = useContext(PostsContext);
 
     const save = (key, post) => {
         editPost(key, 
@@ -24,11 +22,11 @@ const _EditPostScreen = ({history, location, match}) =>{
     }
     
     return <div>
-        <PostForm data={location.state.data} doneHandler={save} success={state.success} error={state.error}  />
+        <PostForm data={location.state.data} doneHandler={save} success={postsState.success} error={postsState.error}  />
     </div>
 }
 
 
 
-export const EditPostScreen = withRouter(_EditPostScreen)
+export const EditPostScreen = withPosts(  withRouter(_EditPostScreen) )
 

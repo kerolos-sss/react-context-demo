@@ -1,22 +1,25 @@
 import React, { useContext } from 'react'
 import { Input, Label } from 'reactstrap'
-import { AuthContext } from '../contexts/AuthContext'
-export const LoginScreen = () => {
+import { AuthContext, withAuth } from '../contexts/AuthContext'
+const _LoginScreen = function ({authState, login, setUsername, setPassword}) {
 
-    const {state, login, setUsername, setPassword} = useContext(AuthContext)
-    console.log(state);
+    console.log(arguments);
+    // const {state: authState, login, setUsername, setPassword} = useContext(AuthContext)
+    console.log(authState);
 
     return (<>
         <Label>Username</Label>
         <br/>
-        <Input value={state?.username || ""} type="text" onChange={ e => setUsername(e.target.value)} />
+        <Input value={authState?.username || ""} type="text" onChange={ e => setUsername(e.target.value)} />
         <br/>
         <Label>Password</Label>
         <br/>
-        <Input value={state?.password || ""} type="password" onChange={e => setPassword(e.target.value)}/>
+        <Input value={authState?.password || ""} type="password" onChange={e => setPassword(e.target.value)}/>
         <br/>
-        <Input value="login" type="button" onClick={() => login(state.username, state.password)}/>
-        { state?.error &&  <> <br/> <Label>{state.error}</Label> </>}
+        <Input value="login" type="button" onClick={() => login(authState.username, authState.password)}/>
+        { authState?.error &&  <> <br/> <Label>{authState.error}</Label> </>}
     </>)
 
 }
+
+export const LoginScreen = withAuth(_LoginScreen);

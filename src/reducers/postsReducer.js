@@ -6,7 +6,7 @@
  * @returns {{error: null | undefined | string, 
     *  posts: {id: number, title: string, body: string, successMessage: string | null | undefined}[] }}
     */
-   export const postsReducer = (state, action) => {
+   export const postsReducer = (state = {}, action) => {
        console.log("PostsReducer")
        console.log(state)
        console.log(action)
