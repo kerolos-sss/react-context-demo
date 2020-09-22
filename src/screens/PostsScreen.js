@@ -24,7 +24,12 @@ export const PostsScreen = () => {
     const navigateToAddPost = () => {
         history.push("/posts/new")
     }
-    
+    const navigateToEditPost = (key, data) => {
+        history.push(`/posts/edit/${key}`, {id: key, data})
+    }
+    const navigateToPostDetail = (key, data) => {
+        history.push(`/posts/${key}`, {id: key, data})
+    }
     
     useEffect(() => {
         console.log("PostsScreen reloaded")
@@ -56,7 +61,7 @@ export const PostsScreen = () => {
                         detail: item.body
                     }
                 })}
-                    actions={{ delete: deletePost, edit: () => { }, view: () => { } }} />
+                    actions={{ delete: deletePost, edit: navigateToEditPost , view: navigateToPostDetail }} />
                 :
                 <h3>No Posts yet</h3>
         }

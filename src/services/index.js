@@ -55,33 +55,33 @@ export class DataContainer {
         },
         {
             id: 2,
-            title: "First Post",
-            body: "First post body"
+            title: "Second Post",
+            body: "Second post body"
         },
         {
             id: 3,
-            title: "First Post",
-            body: "First post body"
+            title: "Third Post",
+            body: "Third post body"
         },
         {
             id: 4,
-            title: "First Post",
-            body: "First post body"
+            title: "Fourth Post",
+            body: "Fourth post body"
         },
         {
             id: 5,
-            title: "First Post",
-            body: "First post body"
+            title: "Fifth Post",
+            body: "Fifth post body"
         },
         {
             id: 6,
-            title: "First Post",
-            body: "First post body"
+            title: "Sixth Post",
+            body: "Sixth post body"
         },
         {
             id: 7,
-            title: "First Post",
-            body: "First post body"
+            title: "Seventh Post",
+            body: "Seventh post body"
         },
     ];
 }
@@ -108,7 +108,9 @@ export const addPost = (post) => {
 
             setTimeout(() => {
                 let ids = DataContainer.data.map(post => post.id);
-                let newId = Math.max([0,...ids]) + 1;
+                console.log("IDS", ids)
+
+                let newId = Math.max(...[0, ...ids]) + 1;
                 post.id = newId;
                 DataContainer.data.push({ ...post });
                 resolve(post);
@@ -124,6 +126,8 @@ export const addPost = (post) => {
 
 export const editPost = (id, post) => {
     // I want a fair chance of failure 
+    console.log("editPost");
+    console.log(id, post)
     let num = Math.random()
     return new Promise((resolve, reject) => {
         if (num >= 0.25) {
@@ -135,6 +139,8 @@ export const editPost = (id, post) => {
                     reject(new Error("Resource Not Found"));
                     return;
                 }
+                DataContainer.data = DataContainer.data.map(p => p == original ? { ...post, id: id } : p );
+                
                 original = { ...post, id: id }
                 resolve({ ...original });
             }, 1000);
@@ -160,8 +166,7 @@ export const deletePost = (id) => {
                     reject(new Error("Resource Not Found"));
                     return;
                 }
-
-                DataContainer.data.splice(originalIndex, 1)
+                DataContainer.data = DataContainer.data.filter(post => post.id != id);
                 resolve({ message: "Deleted" });
             }, 1000);
 

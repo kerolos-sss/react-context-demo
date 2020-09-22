@@ -7,7 +7,9 @@ import { AuthContext, AuthProvider } from './contexts/AuthContext'
 import { LoginScreen } from './screens/LoginScreen';
 import { PostsScreen } from './screens/PostsScreen';
 import { PostsProvider } from './contexts/PostsContext';
-import { AddPost } from './screens/AddPost';
+import { EditPostScreen } from './screens/EditPostScreen';
+import { PostDetailScreen } from './screens/PostDetailScreen';
+import { AddPostScreen } from './screens/AddPostScreen';
 const Home = () => <p>Home</p>
 const About = () => <p>About</p>
 
@@ -22,9 +24,14 @@ function App() {
         <BrowserRouter>
           <Redirect path="/" to="/posts" />
           <Route exact path="/posts" component={PostsScreen} />
-          <Route path="/posts/new"  component={AddPost} />
+          <Route path="/posts/new"  component={AddPostScreen} />
+          <Route path="/posts/edit/:id"  component={EditPostScreen} />
+          <Route exact path="/posts/:id"  component={PostDetailScreen} />
+
           <Route path="/about" component={About} />
           <Route path="/home" component={Home} />
+
+
 
         </BrowserRouter> :
         <BrowserRouter >

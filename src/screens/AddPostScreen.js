@@ -3,12 +3,8 @@ import { useHistory, useParams, withRouter } from "react-router-dom"
 import { PostForm } from "../components/PostForm";
 import { PostsContext } from "../contexts/PostsContext";
 
+const _AddPostScreen = ({history}) =>{
 
-
-
-const _AddPost = () =>{
-    // const [post] = useParams();
-    const history = useHistory()
     const {state,  addPost} = useContext(PostsContext);
 
     const save = (key, post) => {
@@ -28,5 +24,5 @@ const _AddPost = () =>{
 
 
 
-export const AddPost = withRouter(_AddPost)
+export const AddPostScreen = withRouter(_AddPostScreen)
 

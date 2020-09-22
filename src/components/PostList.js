@@ -31,8 +31,8 @@ export const PostList = ({posts, actions}) => {
                         <h4>{item.heading}</h4>
                         <h4>{item.detail.substring(0, 15) + "..."}</h4>
                         <Input type="button" value="DELETE"  onClick={ () => actions.delete(item.key)} />
-                        <Input type="button" value="Edit" onClick={ () => actions.edit(item.key)} />
-                        <Input type="button" value="View" onClick={ () => actions.view(item.key)} />
+                        <Input type="button" value="Edit" onClick={ () => actions.edit(item.key, item)} />
+                        <Input type="button" value="View" onClick={ () => actions.view(item.key, item)} />
                         
                         </ListGroupItem>
                 })                

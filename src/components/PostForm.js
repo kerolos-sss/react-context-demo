@@ -15,8 +15,8 @@ import { Input, Label } from 'reactstrap'
  */
 export const PostForm = ({data, doneHandler, success, error}) => {
 
-    const [headingState, setHeadingState] = useState(data.heading);
-    const [detailState, setDetailState] = useState(data.detail);
+    const [headingState, setHeadingState] = useState(data?.heading);
+    const [detailState, setDetailState] = useState(data?.detail);
 
     // const [successState, setSuccessState] = useState();
     
@@ -48,7 +48,7 @@ export const PostForm = ({data, doneHandler, success, error}) => {
         <br/>
         <Label>Detail</Label>
         <br/>
-        <Input type="text" value={detailState} onChange={e => setDetailState(e.target.value)} />
+        <Input type="textarea" value={detailState} onChange={e => setDetailState(e.target.value)} />
         <br/>
         <Input type="button" value="Save" onClick={ savePressed}/>
         <br/>
