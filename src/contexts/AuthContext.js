@@ -2,7 +2,7 @@ import {createDataContext} from './createDataContext'
 import * as services from './../services'
 
 
-const reducer = (state, action) => {
+export const authReducer = (state, action) => {
 
     switch(action.type){
 
@@ -37,7 +37,7 @@ const setPassword = dispatch => (password) => {
 }
 
 export const { Context: AuthContext, Provider: AuthProvider  } = createDataContext(
-    reducer, {
+    authReducer, {
     login,
     setPassword,
     setUsername,
