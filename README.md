@@ -5,9 +5,17 @@
     - As long as the Provider component is mounted it will provide the values to the subsequent children
     - Multiple providers for different context types may be used
     - A useContext child or a Context.Consumer component will use the context of it's nearest ancestor 
-      
+
+
+[V good tutorial](https://kentcdodds.com/blog/how-to-use-react-context-effectively)
+
+[REF](https://reactjs.org/docs/context.html#consuming-multiple-contexts)
+
+
 
 ```
+
+
 // Theme context, default to light theme
 const ThemeContext = React.createContext('light');
 
