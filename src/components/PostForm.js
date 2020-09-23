@@ -13,6 +13,13 @@ import { Input, Label } from 'reactstrap'
  * @param {PostForm} props 
  * 
  */
+export const TEST = (props) => {
+    console.log("test")
+    console.log(props)
+    return <ul>
+        { Object.entries(props).map( ([key, val]) => <li key={key}> Key: {key}, value: {val} </li> ) }
+    </ul>
+}
 export const PostForm = ({data, doneHandler, success, error}) => {
 
     const [headingState, setHeadingState] = useState(data?.heading);

@@ -35,6 +35,9 @@ export const PostsScreen = () => {
         console.log("PostsScreen reloaded")
         fetchAll()
 
+        return () => {
+            console.log("Cleanup should be here")
+        }
 
     }, [])
 
