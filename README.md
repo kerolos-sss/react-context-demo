@@ -25,3 +25,33 @@ Think of an action as a very brief snippet of news. “Mary liked article 42.”
 
 
 [Async with redux thunk middleware](https://www.youtube.com/watch?v=z2XCUu2wIl0)
+
+
+# What is a React state
+    - It is a value that has some way to be modified, it is always watched when rendered in the mounted React Component Hierarchy 
+
+# What is a Reducer
+    - is a function that takes the current state, and an action. It then applies the action to the state and returns the resulting state
+
+# What is the action
+    - a normal JavaScript object.
+    - it just has to be understandable by the reducer.
+    - the convention is to use the `type` key.
+    - some middleware may use the type key so it is best to use it.
+    ``` 
+    { 
+        type: "SOME_ACTION", 
+        payload: {}
+    } 
+    ``` 
+# Action Creators
+    - helper functions given parameters they give off an action
+
+
+# Context uses a provider that provides values to the sub hierarchy .
+
+    - Providing a state (React State) and some actions to modify it can do the whole trick of 
+    - As long as the Provider component is mounted it will provide the values to the subsequent children
+    - Multiple providers for different context types may be used
+    - A useContext child or a Context.Consumer component will use the context of it's nearest ancestor 
+
