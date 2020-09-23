@@ -1,3 +1,17 @@
+# What is a React state
+    - It is a value that has some way to be modified, it is always watched when rendered in the mounted React Component Hierarchy 
+
+# What is a Reducer
+    - is a function that takes the current state, and an action. It then applies the action to the state and returns the resulting state
+
+# What is the action
+    - a normal JavaScript object 
+    ``` 
+    { 
+        type: "SOME_ACTION", 
+        payload: {}
+    } 
+    ``` 
 
 # Context uses a provider that provides values to the sub hierarchy .
 
