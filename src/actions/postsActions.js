@@ -1,7 +1,6 @@
 import * as services from './../services'
 
 
-
 export const fetchAll = dispatch => async () => {
     try {
         let posts = await services.getAllPosts();

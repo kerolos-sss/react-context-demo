@@ -1,13 +1,16 @@
 import React, { useContext } from 'react'
 import { Input, Label } from 'reactstrap'
 import { AuthContext, withAuth } from '../contexts/AuthContext'
-const _LoginScreen = function ({authState, login, setUsername, setPassword}) {
+const _LoginScreen = function ({authState, login, setUsername, setPassword, sagaTheLogin}) {
 
     console.log(arguments);
     // const {state: authState, login, setUsername, setPassword} = useContext(AuthContext)
     console.log(authState);
 
     return (<>
+        <Input value="SAGA AWAY THE LOGIN" type="button" onClick={() => sagaTheLogin()}/>
+        <br/>
+        <br/>
         <Label>Username</Label>
         <br/>
         <Input value={authState?.username || ""} type="text" onChange={ e => setUsername(e.target.value)} />

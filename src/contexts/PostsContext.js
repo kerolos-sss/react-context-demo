@@ -1,7 +1,7 @@
 import { createDataContext } from './createDataContext'
 import { postsReducer } from '../reducers/postsReducer';
-// import { fetchAll, addPost, editPost, deletePost } from '../actions/postsActions'
-import { fetchAll, addPost, editPost, deletePost } from '../actions/postsActionsThunk'
+import { fetchAll, addPost, editPost, deletePost } from '../actions/postsActions'
+// import { fetchAll, addPost, editPost, deletePost } from '../actions/postsActionsThunk'
 
 import { connect } from 'react-redux';
 
@@ -23,21 +23,6 @@ const mapStateToProps = state => {
     }
 }
 // Those are actions with injected dispatch
-// const mapDispatchToProps = dispatch => {
-//     const actions =  {
-//         fetchAll,
-//         addPost,
-//         editPost,
-//         deletePost
-//     }
-//     const boundActions = {};
-//     for(const key in actions){
-//         boundActions[key] = actions[key](dispatch);
-//     }
-//     return boundActions
-// }
-
-// Those are actions with injected dispatch
 const mapDispatchToProps = dispatch => {
     const actions =  {
         fetchAll,
@@ -47,13 +32,28 @@ const mapDispatchToProps = dispatch => {
     }
     const boundActions = {};
     for(const key in actions){
-        boundActions[key] = (...params) => dispatch(actions[key](...params))
+        boundActions[key] = actions[key](dispatch);
     }
-    console.log("POST CONTEXT")
-    console.log("BOUND ACTIONS", boundActions)
-    
     return boundActions
 }
+
+// Those are actions with injected dispatch
+// const mapDispatchToProps = dispatch => {
+//     const actions =  {
+//         fetchAll,
+//         addPost,
+//         editPost,
+//         deletePost
+//     }
+//     const boundActions = {};
+//     for(const key in actions){
+//         boundActions[key] = (...params) => dispatch(actions[key](...params))
+//     }
+//     console.log("POST CONTEXT")
+//     console.log("BOUND ACTIONS", boundActions)
+    
+//     return boundActions
+// }
 
 
 export const withPosts = connect(mapStateToProps, mapDispatchToProps);
