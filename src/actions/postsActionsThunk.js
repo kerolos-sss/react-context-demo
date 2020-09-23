@@ -20,7 +20,7 @@ export const deletePost =  (id) => async (dispatch, state) => {
     }
 }
 
-export const editPost =  async (id, data) => async (dispatch, state) => {
+export const editPost = (id, data) => async (dispatch, state) => {
     try {
         let post = await services.editPost(id, data);
         dispatch({ type: "edit_post_success", payload: { id: id, data: data, successMessage: "Edited successfully" } })
@@ -31,7 +31,7 @@ export const editPost =  async (id, data) => async (dispatch, state) => {
     }
 }
 
-export const addPost = async (data) => async (dispatch, state) => {
+export const addPost = (data) => async (dispatch, state) => {
     try {
         let post = await services.addPost(data);
         let id = post.id;

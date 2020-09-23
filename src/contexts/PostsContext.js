@@ -49,8 +49,11 @@ const mapDispatchToProps = dispatch => {
     for(const key in actions){
         boundActions[key] = (...params) => dispatch(actions[key](...params))
     }
+    console.log("POST CONTEXT")
+    console.log("BOUND ACTIONS", boundActions)
+    
     return boundActions
 }
 
 
-export const withPosts = connect(mapStateToProps, () => {});
+export const withPosts = connect(mapStateToProps, mapDispatchToProps);
