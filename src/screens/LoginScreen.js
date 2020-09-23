@@ -20,7 +20,7 @@ const _LoginScreen = function ({authState, login, setUsername, setPassword, saga
         <Input value={authState?.password || ""} type="password" onChange={e => setPassword(e.target.value)}/>
         <br/>
         <Input value="login" type="button" onClick={() => login(authState.username, authState.password)}/>
-        { authState?.error &&  <> <br/> <Label>{authState.error}</Label> </>}
+        { authState?.error &&  <> <br/> <Label style={{color: "red"}}>{authState.error}</Label> </>}
     </>)
 
 }

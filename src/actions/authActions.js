@@ -3,7 +3,6 @@ import * as services from './../services'
 
 export const sagaTheLogin = dispatch =>  async () => {
 
-    debugger;
     dispatch(
         {type: "SAGA_DEMO_LOGIN", payload: {getLoginErrorAction, 
         setUsername: setUsername(dispatch), 
