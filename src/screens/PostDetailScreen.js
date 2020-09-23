@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { useHistory, useParams, withRouter } from "react-router-dom"
 import { PostDetail } from "../components/PostDetail";
-import { PostsContext } from "../contexts/PostsContext";
+import { PostsContext, withPosts } from "../contexts/PostsContext";
 
-const _PostDetailScreen = ({ history, location, match }) => {
+const _PostDetailScreen = ({ history, location, postsState, editPost }) => {
     // console.log(props);
 
 
 
-    const { state, editPost } = useContext(PostsContext);
+    // const { state: postsState, editPost } = useContext(PostsContext);
 
     const done = (key, post) => {
         history.goBack();
@@ -21,5 +21,5 @@ const _PostDetailScreen = ({ history, location, match }) => {
 
 
 
-export const PostDetailScreen = withRouter(_PostDetailScreen)
+export const PostDetailScreen = withPosts( withRouter(_PostDetailScreen))
 
